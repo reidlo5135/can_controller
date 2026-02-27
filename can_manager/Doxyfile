@@ -1,0 +1,12 @@
+PROJECT_NAME           = "CAN Manager"
+OUTPUT_DIRECTORY       = ./docs
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+EXTRACT_ALL            = YES
+RECURSIVE              = YES
+INPUT                  = .
+FILE_PATTERNS          = *.cpp *.hpp
+QUIET                  = YES
+
+USE_MDFILE_AS_MAINPAGE = README.md
+

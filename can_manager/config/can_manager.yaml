@@ -1,0 +1,98 @@
+/can_manager:
+  ros__parameters:
+    use_sim_time: false
+    can:
+      send:
+        channel: "vcan0"
+        activate_valid: 1
+        accelerate:
+          name: "ad_control_accelerate"
+          topic: "/can/control/accelerate"
+          id: 0x504
+          field: "AD_Speed_Control"
+          factor: 0.1
+          offset: 0.0
+          max_speed: 20.0
+          min_speed: 0.0
+          work_mode:
+            torque: 0
+            speed: 1
+            accelerate: 2
+          gear:
+            parking: 0
+            drive: 1
+            neutral: 2
+            rear: 3
+        steering:
+          name: "ad_control_steering"
+          topic: "/can/control/steering"
+          id: 0x502
+          field: "AD_Steering_Angle_Cmd"
+          factor: 0.1
+          offset: -30.0
+          max_angle: 30.0
+          min_angle: -30.0
+        brake:
+          name: "ad_control_brake"
+          topic: "/can/control/brake"
+          id: 0x503
+          field: "AD_BrakePressure_Cmd"
+          factor: 1.0
+          offset: 0.0
+          press: 100
+          release: 0
+        body:
+          name: "ad_control_body"
+          topic: "/can/control/body"
+          id: 0x506
+          field: "AD_Control_Body"
+          factor: 1.0
+          offset: 0.0
+          max_value: 1
+          min_value: 0
+      dump:
+        channel: "vcan0"
+        rpm:
+          name: "mcu_status_2"
+          topic: "/can/status/rpm"
+          id: 0x18F203EF
+          field: "Motor_speed"
+          factor: 0.25
+          offset: 0.0
+          correction: 35.0
+        bms:
+          name: "bms_pack_status"
+          topic: "/can/status/bms"
+          id: 0x18F105F3
+          field: "BMS_SOC"
+          factor: 1.0
+          offset: 0.0
+        gear:
+          name: "mcu_general_status"
+          topic: "/can/status/gear"
+          id: 0x4F201EF
+          field: "MCU_Gear"
+          factor: 1.0
+          offset: 0.0
+          parking: 0
+          drive: 1
+          neutral: 2
+          rear: 3
+        odometry:
+          name: "vehicle_odometry_status"
+          topic: "/can/status/odometry"
+          id: 0x3A2
+          factor: 0.8
+          offset: 0.0
+    vehicle:
+      wheel:
+        size: 0.5078
+        base: 1.15
+      control:
+        loop:
+          trigger: true
+          rate: 50
+      status:
+        topic: "/can/status/vehicle"
+        loop:
+          rate: 50

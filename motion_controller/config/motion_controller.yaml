@@ -1,0 +1,70 @@
+/motion_controller:
+  ros__parameters:
+    vehicle:
+      control:
+        twist:
+          topic: "/cmd_vel"
+          correction:
+            linear: 1.4
+            angular: 1.3
+          limit:
+            linear: 1.2
+            angular: 30.0
+        accelerate:
+          topic: "/can/control/accelerate"
+          limit:
+            max: 6.0
+            min: 0.5
+          pid:
+            rate: 100
+            dt: 0.1
+            kp: 0.5
+            ki: 0.1
+            kd: 0.01
+            integral: 0.0
+            previous_error: 0.0
+        steering:
+          topic: "/can/control/steering"
+          limit: 30.0
+        brake:
+          topic: "/can/control/brake"
+          limit: 100
+        emergency:
+          topic: "/can/control/emergency"
+          trigger: true
+        deceleration:
+          status:
+            topic: "/motion/deceleration/status"
+          activate:
+            topic: "/motion/deceleration/activate"
+          trigger: false
+      status:
+        topic: "/can/status/vehicle"
+      mcu:
+        rpm:
+          topic: "/can/status/rpm"
+          correction: 35.0
+        gear:
+          topic: "/can/status/gear"
+          position:
+            parking: 0
+            drive: 1
+            neutral: 2
+            rear: 3
+          ratio: 20.0
+        heartbeat:
+          activate: 1
+          deactivate: 0
+          retry: 10
+      wheel:
+        size: 0.5078
+        base: 1.15
+    map:
+      topic: "/map/position"
+      area:
+        geo_fence: 0
+        start: 1
+        end: 2
+        fair: 3
+        road: 4
+      distance_geo_fence: 20.0

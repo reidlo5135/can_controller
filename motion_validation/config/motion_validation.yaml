@@ -1,0 +1,16 @@
+/motion_validation:
+  ros__parameters:
+    vehicle:
+      vertification:
+        loop:
+          rate: 50
+      status:
+        topic: "/can/status/vehicle"
+      wheel:
+        size: 0.5078
+        base: 1.15
+    position:
+      gps:
+        topic: "/gps/fix"
+      map:
+        topic: "/map/position"
